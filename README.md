@@ -25,7 +25,30 @@ Marketplace em Laravel onde várias lojas (pessoa física ou jurídica) anunciam
 - Estoque baixado atomicamente; compras não pagas expiram em 30 minutos e devolvem o estoque.
 - Testes automatizados de todas as regras de negócio e CI no GitHub Actions.
 
-## Rodando localmente
+## Rodando com Docker (recomendado)
+
+Requisitos: Docker Desktop e git.
+
+```bash
+git clone https://github.com/gabrielkloper/loja-pneus.git
+cd loja-pneus
+docker compose up -d --build
+```
+
+Abra http://localhost:8000. A primeira subida demora alguns minutos (baixa e compila tudo); o banco já vem com os dados de demonstração.
+
+| Comando | Para quê |
+| --- | --- |
+| `docker compose logs -f` | Ver logs, inclusive os links de verificação de e-mail |
+| `docker compose up -d --build` | Aplicar alterações no código |
+| `docker compose exec app php artisan test` | Rodar os testes |
+| `docker compose exec app php artisan marketplace:approve-seller {slug}` | Aprovar uma loja |
+| `docker compose down` | Parar (os dados continuam salvos) |
+| `docker compose down -v` | Parar e apagar o banco (volta aos dados de demonstração) |
+
+Detalhes em [ADR-0012](docs/adr/0012-ambiente-local-com-docker.md).
+
+## Rodando sem Docker
 
 Requisitos: PHP 8.3+, Composer 2 e Node 22+.
 
@@ -71,7 +94,7 @@ php artisan marketplace:approve-seller nome-da-loja   # o slug aparece em /lojas
 
 ### E-mail de verificação
 
-Comprar e vender exigem e-mail verificado. Em desenvolvimento os e-mails vão para `storage/logs/laravel.log` (`MAIL_MAILER=log`); copie o link de verificação de lá.
+Comprar e vender exigem e-mail verificado. Em desenvolvimento os e-mails não são enviados: o conteúdo vai para o log (`MAIL_MAILER=log`). Com Docker, veja em `docker compose logs`; sem Docker, em `storage/logs/laravel.log`. Copie o link de verificação de lá. As contas de demonstração já vêm verificadas.
 
 ## Testes e qualidade
 

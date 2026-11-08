@@ -51,3 +51,34 @@ jobs:
       - name: Static analysis (Larastan)
         if: success() || failure()
         run: vendor/bin/phpstan analyse --memory-limit=1G
+
+  # Garante que a configuração Docker (ADR-0012) continua funcionando:
+  # constrói a imagem, roda os testes dentro dela e sobe a loja de verdade.
+  docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Build image
+        run: docker build -t loja-pneus .
+
+      - name: Tests inside the image
+        run: docker run --rm loja-pneus sh -c "cp .env.example .env && php artisan key:generate && php artisan test"
+
+      - name: Start with docker compose
+        run: docker compose up -d --build
+
+      - name: Smoke test (home, store page and login)
+        run: |
+          for i in $(seq 1 30); do curl -fsS -o /dev/null http://localhost:8000/ && break; sleep 2; done
+          curl -fsS http://localhost:8000/ | grep -q "Encontre pneus"
+          curl -fsS http://localhost:8000/lojas/pneus-curitiba | grep -q "Pneus Curitiba"
+          curl -fsS -o /dev/null http://localhost:8000/login
+
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs

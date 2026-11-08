@@ -1,0 +1,26 @@
+# Sobe a loja com um comando (requer Docker Desktop):
+#
+#     docker compose up -d --build
+#
+# Depois abra http://localhost:8000. Detalhes no README e na ADR-0012.
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_DEBUG: "true"
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /data/database.sqlite
+      # Logs (inclusive os e-mails de verificação) aparecem em "docker compose logs".
+      LOG_CHANNEL: stderr
+      MAIL_MAILER: log
+      # Vários processos PHP: o Livewire faz requisições em paralelo.
+      PHP_CLI_SERVER_WORKERS: "4"
+    volumes:
+      - loja-data:/data
+
+volumes:
+  loja-data:

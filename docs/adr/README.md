@@ -15,5 +15,6 @@ Cada arquivo desta pasta registra **uma** decisão importante: o problema, o que
 | [0009](0009-dinheiro-em-centavos.md) | Dinheiro em centavos inteiros | Aceita |
 | [0010](0010-actions-como-nucleo.md) | Actions como núcleo das regras de negócio | Aceita |
 | [0011](0011-compras-por-agentes-de-ia.md) | Compras por agentes de IA: OAuth, mandatos e MCP | Proposta |
+| [0012](0012-ambiente-local-com-docker.md) | Ambiente local com Docker | Aceita |
 
 Modelo para uma ADR nova: copie [`template.md`](template.md).
