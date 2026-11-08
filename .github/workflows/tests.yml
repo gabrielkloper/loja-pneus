@@ -81,4 +81,9 @@ jobs:
 
       - name: Logs on failure
         if: failure()
-        run: docker compose logs
+        run: |
+          docker compose logs
+          echo "----- resposta da página inicial -----"
+          curl -s http://localhost:8000/ | grep -oE '<title>[^<]*</title>|"message":"[^"]{0,400}|class="[^"]*exception[^"]*"[^>]*>[^<]{0,300}' | head -20 || true
+          echo "----- arquivos gerados pelo build -----"
+          docker compose exec -T app sh -c 'ls public/build public/build/assets | head -20; ls public | head -20'

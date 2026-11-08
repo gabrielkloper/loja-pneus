@@ -23,4 +23,5 @@ php artisan schedule:work > /dev/null 2>&1 &
 # 4. Servidor web. "exec" faz o PHP virar o processo principal do container,
 #    então "docker compose stop" o encerra corretamente.
 echo "Loja no ar: http://localhost:8000"
-exec php artisan serve --host=0.0.0.0 --port=8000
+# --no-reload permite usar PHP_CLI_SERVER_WORKERS (vários processos).
+exec php artisan serve --host=0.0.0.0 --port=8000 --no-reload
