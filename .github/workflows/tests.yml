@@ -42,8 +42,12 @@ jobs:
       - name: Tests
         run: php artisan test
 
+      # "success() || failure()" roda estas etapas mesmo se os testes falharem,
+      # para ver todos os problemas numa execução só.
       - name: Code style (Pint)
+        if: success() || failure()
         run: vendor/bin/pint --test
 
       - name: Static analysis (Larastan)
+        if: success() || failure()
         run: vendor/bin/phpstan analyse --memory-limit=1G

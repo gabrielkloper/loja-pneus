@@ -12,7 +12,7 @@
                 <flux:text size="sm" class="text-amber-600">Não entendi a medida. Exemplo: 205/55 R16.</flux:text>
             @endif
 
-            <flux:input wire:model.live.debounce.400ms="term" label="Marca ou modelo" placeholder="Pirelli" />
+            <flux:input wire:model.live.debounce.400ms="term" label="Marca ou modelo" placeholder="Ex.: Cinturato" />
 
             <flux:select wire:model.live="condition" label="Condição">
                 <flux:select.option value="">Todas</flux:select.option>
