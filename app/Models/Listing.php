@@ -5,13 +5,13 @@ namespace App\Models;
 use App\Enums\ListingStatus;
 use App\Enums\SellerStatus;
 use App\Enums\TireCondition;
+use Carbon\CarbonInterface;
 use Database\Factories\ListingFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * Anúncio: a oferta de um vendedor para um pneu do catálogo.
@@ -28,8 +28,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $inmetro_registration
  * @property int $warranty_months
  * @property string|null $description
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  * @property-read Seller $seller
  * @property-read TireModel $tireModel
  * @property-read SellerLocation $location

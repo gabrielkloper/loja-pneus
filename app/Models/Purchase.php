@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use App\Enums\PurchaseStatus;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * Uma compra: um checkout com um único pagamento, contendo um pedido por
@@ -23,10 +23,10 @@ use Illuminate\Support\Carbon;
  * @property string $payment_provider
  * @property string|null $payment_reference
  * @property string|null $pix_code
- * @property Carbon $expires_at
- * @property Carbon|null $paid_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface $expires_at
+ * @property CarbonInterface|null $paid_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  * @property-read User $buyer
  */
 class Purchase extends Model

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Enums\OrderEventActor;
 use App\Enums\OrderStatus;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * Um acontecimento na linha do tempo do pedido. Eventos nunca são
@@ -18,8 +18,8 @@ use Illuminate\Support\Carbon;
  * @property OrderEventActor $actor
  * @property int|null $actor_user_id
  * @property string|null $message
- * @property Carbon|null $estimated_delivery_at
- * @property Carbon $created_at
+ * @property CarbonInterface|null $estimated_delivery_at
+ * @property CarbonInterface $created_at
  */
 class OrderEvent extends Model
 {

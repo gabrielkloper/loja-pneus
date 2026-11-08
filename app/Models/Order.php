@@ -9,7 +9,6 @@ use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * Pedido: a parte de uma compra que cabe a UMA loja (ADR-0004).
@@ -27,14 +26,14 @@ use Illuminate\Support\Carbon;
  * @property int $subtotal_cents
  * @property int $shipping_cents
  * @property int $total_cents
- * @property Carbon|null $estimated_delivery_at
+ * @property CarbonInterface|null $estimated_delivery_at
  * @property string|null $carrier
  * @property string|null $tracking_code
- * @property Carbon|null $cancelled_at
+ * @property CarbonInterface|null $cancelled_at
  * @property string|null $cancellation_reason
  * @property int $refunded_cents
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  * @property-read Purchase $purchase
  * @property-read Seller $seller
  * @property-read User $buyer

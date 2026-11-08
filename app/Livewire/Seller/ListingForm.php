@@ -138,9 +138,9 @@ class ListingForm extends Component
 
     public function save(SaveListing $saveListing): void
     {
-        $data = $this->validate();
+        $this->validate();
 
-        $priceCents = Money::parse($data['price']);
+        $priceCents = Money::parse($this->price);
         if ($priceCents === null || $priceCents === 0) {
             $this->addError('price', 'Informe um preço válido, ex.: 459,90.');
 
@@ -154,19 +154,25 @@ class ListingForm extends Component
         }
 
         try {
+            // Depois de validar, montamos o array campo a campo a partir das
+            // propriedades (já tipadas), no formato exato que a Action espera.
             $saveListing->handle($this->seller(), [
-                ...$data,
-                'width' => (int) $data['width'],
-                'aspect_ratio' => (int) $data['aspect_ratio'],
-                'load_index' => (int) $data['load_index'],
-                'stock' => (int) $data['stock'],
-                'seller_location_id' => (int) $data['seller_location_id'],
-                'warranty_months' => (int) ($data['warranty_months'] ?? 0),
-                'rim' => str_replace(',', '.', $data['rim']),
+                'brand' => $this->brand,
+                'model' => $this->model,
+                'width' => (int) $this->width,
+                'aspect_ratio' => (int) $this->aspect_ratio,
+                'rim' => str_replace(',', '.', $this->rim),
+                'load_index' => (int) $this->load_index,
+                'speed_index' => $this->speed_index,
+                'condition' => $this->condition,
+                'status' => $this->status,
                 'price_cents' => $priceCents,
-                'dot_code' => $data['dot_code'] ?: null,
-                'inmetro_registration' => $data['inmetro_registration'] ?: null,
-                'description' => $data['description'] ?: null,
+                'stock' => (int) $this->stock,
+                'seller_location_id' => (int) $this->seller_location_id,
+                'dot_code' => $this->dot_code !== '' ? $this->dot_code : null,
+                'inmetro_registration' => $this->inmetro_registration !== '' ? $this->inmetro_registration : null,
+                'warranty_months' => (int) $this->warranty_months,
+                'description' => $this->description !== '' ? $this->description : null,
             ], $listing);
         } catch (BusinessRuleException $e) {
             $this->addError('form', $e->getMessage());

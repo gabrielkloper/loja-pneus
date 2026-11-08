@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\DocumentType;
 use App\Enums\SellerStatus;
+use Carbon\CarbonInterface;
 use Database\Factories\SellerFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * Uma loja do marketplace (ADR-0003).
@@ -25,11 +25,11 @@ use Illuminate\Support\Carbon;
  * @property string $document
  * @property string $phone
  * @property SellerStatus $status
- * @property Carbon|null $approved_at
+ * @property CarbonInterface|null $approved_at
  * @property int|null $delivery_fee_cents
  * @property int|null $delivery_days
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  * @property-read User $owner
  */
 // "status" e "approved_at" ficam FORA do Fillable de propósito: nenhum

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * Item de um pedido, com título e preço congelados no momento da compra.
@@ -16,8 +16,8 @@ use Illuminate\Support\Carbon;
  * @property int $unit_price_cents
  * @property int $quantity
  * @property int $total_cents
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  * @property-read Listing $listing
  */
 class OrderItem extends Model

@@ -21,7 +21,7 @@ class CartController extends Controller
             'quantity' => ['required', 'integer', 'min:1', 'max:'.config('marketplace.max_units_per_item')],
         ]);
 
-        $listing = Listing::query()->visible()->find($data['listing_id']);
+        $listing = Listing::query()->visible()->whereKey((int) $data['listing_id'])->first();
 
         if ($listing === null) {
             return back()->withErrors(['domain' => 'Este anúncio não está mais disponível.']);

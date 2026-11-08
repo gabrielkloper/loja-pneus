@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Database\Factories\TireModelFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * Um pneu do catálogo: marca, modelo, medida e índices (ADR-0003).
@@ -20,8 +20,8 @@ use Illuminate\Support\Carbon;
  * @property string $rim
  * @property int $load_index
  * @property string $speed_index
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  */
 #[Fillable(['brand', 'model', 'width', 'aspect_ratio', 'rim', 'load_index', 'speed_index'])]
 class TireModel extends Model

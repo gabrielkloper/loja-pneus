@@ -11,6 +11,7 @@ use App\Models\TireModel;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Collection;
 
 /**
  * Dados de demonstração: php artisan migrate:fresh --seed
@@ -75,9 +76,9 @@ class DatabaseSeeder extends Seeder
     }
 
     /**
-     * @return \Illuminate\Support\Collection<int, TireModel>
+     * @return Collection<int, TireModel>
      */
-    private function catalog()
+    private function catalog(): Collection
     {
         return collect([
             ['Pirelli', 'Cinturato P7', 205, 55, '16.0', 91, 'V'],

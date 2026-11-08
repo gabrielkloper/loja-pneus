@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 /**
  * Notificação recebida do gateway de pagamento, guardada para garantir
@@ -15,9 +15,9 @@ use Illuminate\Support\Carbon;
  * @property string $event_id
  * @property string $type
  * @property array<string, mixed> $payload
- * @property Carbon|null $processed_at
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $processed_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  */
 #[Fillable(['provider', 'event_id', 'type', 'payload'])]
 class PaymentWebhookEvent extends Model

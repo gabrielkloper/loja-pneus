@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Payments\FakeGateway;
 use App\Payments\PaymentGateway;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 
 /**
  * Atalhos para montar cenários de marketplace nos testes.
@@ -62,7 +63,7 @@ trait BuildsMarketplace
      *
      * @param  array<string, mixed>  $overrides
      */
-    protected function sendPaidWebhook(Purchase $purchase, array $overrides = [], ?string $signature = null): \Illuminate\Testing\TestResponse
+    protected function sendPaidWebhook(Purchase $purchase, array $overrides = [], ?string $signature = null): TestResponse
     {
         $gateway = $this->fakeGateway();
         $body = (string) json_encode(array_merge($gateway->paidPayload($purchase->fresh()), $overrides));

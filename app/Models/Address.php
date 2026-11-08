@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Carbon\CarbonInterface;
 use Database\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Carbon;
 
 /**
  * Endereço de entrega salvo pelo comprador.
@@ -23,8 +23,8 @@ use Illuminate\Support\Carbon;
  * @property string $district
  * @property string $city
  * @property string $state
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  */
 #[Fillable([
     'label', 'recipient_name', 'zip_code', 'street', 'number', 'complement', 'district', 'city', 'state',
